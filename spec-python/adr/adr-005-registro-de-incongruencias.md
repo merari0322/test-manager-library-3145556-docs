@@ -39,6 +39,13 @@ Tipos: **Contradicción** (dos documentos dicen cosas incompatibles) · **Vacío
 | INC-16 | Contradicción | `tasks.md` T-06 vs. `architecture.md` §3 | T-06 (dominio) exige como evidencia «rol `admin` por API rechazado» | El agregado `User` acepta `admin` y `librarian`; rechazar `admin` es una regla de la API/aplicación (CA-02.3), no del dominio | La evidencia de T-06 está en la capa equivocada |
 | INC-17 | Contradicción | `architecture.md` §3 y §4 (versión Python) vs. `constitution.md` art. XI | `Loan.AddItem`, `Book.Withdraw`, `Lend(memberId, bookIds)` | En el spec de Python los nombres siguen la convención de .NET (PascalCase, camelCase) y no la de Python | Menor: nombres que no corresponden al stack que dice describir |
 | INC-18 | Vacío | `spec.md` CA-02.3 vs. `api-contract.md` §2 | Pedir el rol `admin` responde 422 | No se dice qué `code` lleva (¿`VALIDATION_ERROR`?) | Código de error indefinido |
+| INC-19 | Vacío | `api-contract.md` §1 (códigos de estado) vs. §2 | 401 aplica a «sin token, token inválido o vencido, credenciales inválidas» | El único `code` con 401 es `INVALID_CREDENTIALS`, con origen CA-01.2 (inicio de sesión). No hay código para «sin token» ni «token vencido» | Se responde `INVALID_CREDENTIALS` por ser el único 401 definido |
+| INC-20 | Vacío | `spec.md` RNF-4 vs. `api-contract.md` §1 y §2 | «Todo error HTTP usa el mismo cuerpo» | No hay `code` ni estado definido para un error interno inesperado (500) | Un 500 no puede cumplir el cuerpo único sin inventar un código |
+| INC-21 | Vacío | `api-contract.md` §1 y `data-model.md` §5 vs. `constitution.md` art. II y IV, `architecture.md` §2 | Los identificadores son UUID v4 generados por la aplicación | Ningún puerto ni componente del núcleo está asignado a generarlos (la lista de puertos no lo incluye) | No está definido dónde se generan los identificadores |
+| INC-22 | Ambigüedad | `api-contract.md` §4 vs. `spec.md` CA-01.1 | El token lleva «`sub` y `role`» | La vigencia de 8 horas exige además un vencimiento (`exp`) dentro del token, que el contrato no menciona | La lista de datos del token está incompleta |
+| INC-23 | Contradicción | `data-model.md` §4 vs. §0 | Las claves primarias se llaman `PK_*` | §0 exige `snake_case` en minúsculas y solo define el patrón de nombre `ck_{tabla}_{regla}`; no define nombres para FK ni índices | Convención de nombres inconsistente e incompleta |
+| INC-24 | Vacío | `plan.md` §2 vs. `arquitectura-panoramica.md` | El frontend llama a la API por HTTP `/api/v1` | La configuración por entorno no incluye ninguna variable para que el frontend conozca la URL de la API, ni los puertos de los servicios | El frontend no tiene forma documentada de ubicar la API |
+| INC-25 | Ambigüedad | `plan.md` D-09 de `spec-python` vs. de `spec-.net` | Python: Argon2id. .NET: BCrypt (factor 12) | El `README` dice que ambas versiones describen el mismo producto, pero el reto (Laravel) no dice cuál de los dos algoritmos aplica | Elección de algoritmo de hash sin criterio documentado |
 
 ## 2. Riesgos al traducir el spec a React + Laravel
 
@@ -57,3 +64,6 @@ para que no se cuelen sin darse cuenta.
 | TR-08 | `GET /loans/overdue` y `GET /loans/{id}` conviven (§3.6) | Si `/loans/{id}` se registra primero, captura `overdue` como id |
 | TR-09 | El sembrador usa la API, nunca SQL (`data-model.md` §9) | La costumbre es `php artisan db:seed`, que escribe directo en la base |
 | TR-10 | Pruebas de arquitectura (artículos I a III) con `import-linter` / NetArchTest | Requiere un equivalente en PHP (por ejemplo, pruebas de arquitectura de Pest o Deptrac) |
+| TR-11 | Exactamente seis tablas (`data-model.md` §2) | Laravel necesita su tabla de control `migrations` para registrar las migraciones aplicadas |
+| TR-12 | Variable `DATABASE_URL` (`plan.md` §2) | Laravel lee `DB_URL` y `DB_HOST`/`DB_DATABASE`/… |
+| TR-13 | Solo los endpoints de `api-contract.md` §3 | Laravel trae la ruta `/up`, una página de bienvenida (`/`) y archivos de frontend (Vite) |
