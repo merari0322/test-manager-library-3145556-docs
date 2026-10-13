@@ -54,6 +54,7 @@ Tipos: **Contradicción** (dos documentos dicen cosas incompatibles) · **Vacío
 | INC-31 | Vacío | `spec.md` HU-06 vs. `api-contract.md` §2 y §3.6 | `POST /loans` recibe `member_id` y `book_id` | No define la respuesta cuando el socio o un libro no existe o está dado de baja | Se responde 404 `NOT_FOUND` por ser el código genérico de recurso inexistente |
 | INC-32 | Vacío | `spec.md` CA-06.1 vs. `api-contract.md` §2 | Un préstamo trae de 1 a 3 líneas | Ningún `code` está asociado a CA-06.1 (0 líneas o más de 3) | Se responde `VALIDATION_ERROR` por ser una regla de entrada |
 | INC-33 | Vacío | `spec.md` CA-09.1 y CA-09.2 vs. `api-contract.md` §3.6 | Vencidos con `days_late`, ordenados por más días de retraso | No define cómo se cuentan los días (períodos completos de 24 h o días de calendario) ni el orden en caso de empate | Dos implementaciones pueden dar `days_late` y orden distintos |
+| INC-34 | Vacío | `spec.md` CA-08.2 vs. `api-contract.md` §3.6 | `GET /loans` filtra por `from`, `to`, `status`, `member_id` | No define si `from`/`to` son fechas o instantes, si se puede enviar uno solo, ni la forma de cada elemento de la lista | Filtro y respuesta del listado sin contrato explícito |
 
 ## 2. Riesgos al traducir el spec a React + Laravel
 
