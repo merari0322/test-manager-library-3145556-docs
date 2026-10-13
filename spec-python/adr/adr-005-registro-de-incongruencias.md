@@ -51,6 +51,9 @@ Tipos: **Contradicción** (dos documentos dicen cosas incompatibles) · **Vacío
 | INC-28 | Vacío | `spec.md` CA-05.2 vs. CA-04.1 | Socios: «se lista y se busca, paginado» | Los libros tienen orden definido (por título); los socios no | Paginación de socios sin orden documentado |
 | INC-29 | Vacío | `api-contract.md` §3.4 y §3.5 | Define la petición de `POST /books`, `PUT /books/{id}` y `POST /members` | No define el cuerpo de su respuesta (solo «Libro (respuesta)» como forma general) | Respuesta de creación y edición sin contrato explícito |
 | INC-30 | Vacío | `api-contract.md` §1 (paginación) | `?page=1&size=20`, `size` máximo 50 | No dice si 20 es el valor por defecto o solo un ejemplo | Tamaño de página por defecto indefinido |
+| INC-31 | Vacío | `spec.md` HU-06 vs. `api-contract.md` §2 y §3.6 | `POST /loans` recibe `member_id` y `book_id` | No define la respuesta cuando el socio o un libro no existe o está dado de baja | Se responde 404 `NOT_FOUND` por ser el código genérico de recurso inexistente |
+| INC-32 | Vacío | `spec.md` CA-06.1 vs. `api-contract.md` §2 | Un préstamo trae de 1 a 3 líneas | Ningún `code` está asociado a CA-06.1 (0 líneas o más de 3) | Se responde `VALIDATION_ERROR` por ser una regla de entrada |
+| INC-33 | Vacío | `spec.md` CA-09.1 y CA-09.2 vs. `api-contract.md` §3.6 | Vencidos con `days_late`, ordenados por más días de retraso | No define cómo se cuentan los días (períodos completos de 24 h o días de calendario) ni el orden en caso de empate | Dos implementaciones pueden dar `days_late` y orden distintos |
 
 ## 2. Riesgos al traducir el spec a React + Laravel
 
