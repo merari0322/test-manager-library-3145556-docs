@@ -46,6 +46,11 @@ Tipos: **Contradicción** (dos documentos dicen cosas incompatibles) · **Vacío
 | INC-23 | Contradicción | `data-model.md` §4 vs. §0 | Las claves primarias se llaman `PK_*` | §0 exige `snake_case` en minúsculas y solo define el patrón de nombre `ck_{tabla}_{regla}`; no define nombres para FK ni índices | Convención de nombres inconsistente e incompleta |
 | INC-24 | Vacío | `plan.md` §2 vs. `arquitectura-panoramica.md` | El frontend llama a la API por HTTP `/api/v1` | La configuración por entorno no incluye ninguna variable para que el frontend conozca la URL de la API, ni los puertos de los servicios | El frontend no tiene forma documentada de ubicar la API |
 | INC-25 | Ambigüedad | `plan.md` D-09 de `spec-python` vs. de `spec-.net` | Python: Argon2id. .NET: BCrypt (factor 12) | El `README` dice que ambas versiones describen el mismo producto, pero el reto (Laravel) no dice cuál de los dos algoritmos aplica | Elección de algoritmo de hash sin criterio documentado |
+| INC-26 | Vacío | `api-contract.md` §1 (códigos de estado) | Lista 200/201/204, 401, 403, 404, 409 y 422 | No define 405 (método no permitido, p. ej. `DELETE /members/{id}`, CA-05.3) | Esa respuesta no puede usar el cuerpo único sin inventar un código |
+| INC-27 | Vacío | `data-model.md` §6 Q4 vs. `architecture.md` §2 | Q4: «Listar categorías», frecuencia alta | La lista de puertos no tiene repositorio ni lector de categorías | No está asignado qué puerto atiende `GET /categories` |
+| INC-28 | Vacío | `spec.md` CA-05.2 vs. CA-04.1 | Socios: «se lista y se busca, paginado» | Los libros tienen orden definido (por título); los socios no | Paginación de socios sin orden documentado |
+| INC-29 | Vacío | `api-contract.md` §3.4 y §3.5 | Define la petición de `POST /books`, `PUT /books/{id}` y `POST /members` | No define el cuerpo de su respuesta (solo «Libro (respuesta)» como forma general) | Respuesta de creación y edición sin contrato explícito |
+| INC-30 | Vacío | `api-contract.md` §1 (paginación) | `?page=1&size=20`, `size` máximo 50 | No dice si 20 es el valor por defecto o solo un ejemplo | Tamaño de página por defecto indefinido |
 
 ## 2. Riesgos al traducir el spec a React + Laravel
 
