@@ -56,6 +56,7 @@ Tipos: **Contradicción** (dos documentos dicen cosas incompatibles) · **Vacío
 | INC-33 | Vacío | `spec.md` CA-09.1 y CA-09.2 vs. `api-contract.md` §3.6 | Vencidos con `days_late`, ordenados por más días de retraso | No define cómo se cuentan los días (períodos completos de 24 h o días de calendario) ni el orden en caso de empate | Dos implementaciones pueden dar `days_late` y orden distintos |
 | INC-34 | Vacío | `spec.md` CA-08.2 vs. `api-contract.md` §3.6 | `GET /loans` filtra por `from`, `to`, `status`, `member_id` | No define si `from`/`to` son fechas o instantes, si se puede enviar uno solo, ni la forma de cada elemento de la lista | Filtro y respuesta del listado sin contrato explícito |
 | INC-35 | Contradicción | `tasks.md` T-18 vs. la decisión de este ADR | La evidencia de T-18 incluye «`data-model.md` §4 se actualiza» | T-18 ya se aplicó en el motor (`ck_book_total_positive`, `ck_user_role`), pero este ADR decide no modificar los documentos existentes | §4 sigue marcando ambas reglas como **pendiente (T-18)** aunque el motor ya las impone; por el artículo X, gana el motor y el propietario debe reclasificarlas |
+| INC-36 | Vacío | `api-contract.md` §3.4 | `PUT /books/{id}/cover` sube la portada y `DELETE /books/{id}/cover` la quita | No define el cuerpo ni el estado de respuesta de ninguna de las dos (¿200 con el libro? ¿204?) | Respuesta de portadas sin contrato explícito |
 
 ## 2. Riesgos al traducir el spec a React + Laravel
 
